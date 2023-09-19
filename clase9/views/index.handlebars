@@ -1,3 +1,17 @@
 <div>
     <h1>Saludos, {{name}} {{last_name}}</h1>
+    <h3>Datos</h3>
+    <p>Email: {{email}}</p>
+    <p>Edad: {{age}}</p>
+    <p>Telefono: {{phone}}</p>
+    {{#if rol == "admin"}}
+    {{#each food}}
+    <div>
+        <p>{{this.name}}</p>
+        <p>{{this.price}}</p>
+    </div>
+    {{/each}}
+    {{else}}
+    <p>No eres administrador</p>
+    {{/if}}
 </div>

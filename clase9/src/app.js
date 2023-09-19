@@ -6,20 +6,16 @@ const app = express();
 
 const PORT = process.env.PORT || 3001;
 
+const viewsRoter = require('../routers/views-router/views.router');
+
 app.engine("handlebars", handlebars.engine());
-
 app.set("views", path.join(__dirname, '../views'));
-
 app.set("view engine", "handlebars");
-
 app.use(express.static(__dirname + "/public"))
+app.use("/", viewsRoter)
 
 app.get("/", (req, res) => {
-    let testUser = {
-        name: "Daniel",
-        last_name: "Diaz"
-    }
-    res.render("index", testUser);
+
 });
 
 app.listen(PORT, () => {
