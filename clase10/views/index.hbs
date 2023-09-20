@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+<body>
+    <h1>Aplicacion con Web Socket</h1>
+    <div>
+        <label for="mensaje"></label>
+        <input type="text" id="mensaje" placeholder="Escrite tu mensaje">
+        <button id="btn-send" onclick="enviarMensaje()">Enviar</button>
+    </div>
+    <div>
+        {{{body}}}
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        function enviarMensaje(){
+            const mensajeInput = document.getElementById('mensaje');
+            const mensaje = mensajeInput.value;
+            socket.emit('mensaje', mensaje);
+            mensajeInput.value = ''
+        }
+
+        const btn = document.getElementById("btn-send")
+        btn.addEventListener("click", () => {
+            console.log("Mensaje Enviado")
+        })
+
+        socket.on("mensaje", (data)=> {
+            console.log("mensaje recibido del servidor: " + data)
+        })
+
+    </script>
+</body>
+</html>
