@@ -15,7 +15,7 @@ app.use(express.static(__dirname + "/public"))
 app.use("/", viewsRoter)
 
 app.get("/", (req, res) => {
-
+ res.send('Hola, clase 9')
 });
 
 app.listen(PORT, () => {
