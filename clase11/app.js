@@ -1,6 +1,6 @@
 const express = require('express');
 const http = require("http");
-const socketIo = require('socket.io');
+//const socketIo = require('socket.io');
 const path = require('path');
 const { Server } = require('socket.io');
 const handlebars = require('express-handlebars');
@@ -39,7 +39,8 @@ io.on('connection', (socket) => {
         io.emit('message', { username, message })
     })
 
-    socket.on('diconnect', (message) => {
+    socket.on('disconnect', () => {
+        console.log('usuario desconectado')
         const username = users[socket.id];
         delete users[socket.id];
         io.emit("userDisconnected", username)

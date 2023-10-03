@@ -1,0 +1,161 @@
+-- Mostrar base de datos existentes
+
+show dbs
+
+-- Crear una base de datos
+
+use NombreDB
+
+-- Saber el nombre de la base de datos donde estamos
+
+db
+
+-- Eliminar la base de datos donde estamos posicionados
+
+db.dropDatabase()
+
+-- Crear una coleccion o tabla
+
+db.createCollection("nombre coleccion o tabla")
+
+-- Mostrar todas la colecciones de una base de datos
+
+show coleections
+
+-- Insertar documentos o datos en una coleccion
+
+- Un documento o dato
+
+db.usuarios.insertOne({name: "John", last_name: "Doe", age: 30});
+
+- Varios
+
+db.usuarios.insertMany([{name: "John", last_name: "Doe", age: 30}, {name: "Jane", last_name: "Jhomson", age: 25}]);
+
+-- Ver datos de una coleccion (filtro)
+
+- Todos
+
+db.usuarios.find()
+
+- El primer elemento que cumpla con un criterio
+
+db.usuarios.findOne({name: "John"})
+
+- Filtro
+
+db.usuarios.find({age: "30"})
+
+-- Modificar datos de una coleccion
+
+- Modificar un registro
+
+db.colection.updateOne({campoBusqueda: "valorUnico"}, {$set: {campoActualizar: "nuevo valor"}})
+
+- Modificar varios registros
+
+db.colection.updateMany({campoBusqueda: "valorGeneral"}, {$set: {campoActualizar: "nuevo valor"}})
+
+-- Eliminar datos de una coleccion
+
+- Eliminar un registro que cumpla con una condicion
+
+db.colection.deteOne({key: value})
+
+- Eliminar todos los registros que complan con una condicion
+
+db.colection.deleteMany({key: value})
+
+-- Conteo de documentos
+
+- Todos
+
+db.colleccion.estimatedDocumentCount() // db.collection.countDocument()
+
+- Filto (que cumplan una condicion)
+
+db.collection.countDocument("age: 30")
+
+-- Eliminar eliminar una colecion de la base de datos donde estamos posicionados
+
+db.usuarios.drop()
+
+-- Operadores para filtros de query / consultas
+
+$and condicion uno y dos {$and: [{},{}]}
+$or condicion un o dos {$or: [{},{}]}
+
+- $lt menor que {${}}
+db.usuarios.find(edad: {$gt: 25})
+
+- $lte menos o igual que
+db.usuarios.find(edad: {$gt: 25})
+
+- $gt mayor que
+db.usuarios.find(edad: {$gt: 25})
+
+- $gte mayor o igual que
+db.usuarios.find(edad: {$gte: 25})
+
+- $ne diferente a 
+db.usuarios.find(edad: {$gt: 25})
+
+- $eq igual a
+db.usuarios.find(edad: {$gt: 25})
+
+- $exist elementos si existe un campo especifico 
+db.usuarios.find({name: {$exist: true}});
+
+- $in documentos en un array 
+db.usuarios.find({nombre: {$in: ["Javier", "Alfredo"]}})
+
+$nin no hay coincidencias con valores de un array
+$size coincide con el numero de elementos especificados
+$all coincide con todos los valores definidos en un array
+$elementMatch coincide con algun valor dentro del query
+
+-$type selecciona elementos si son de un tipo especifico
+db.usuarios.find({name: {$type: "string"}})
+
+-- Busqueda avanzada
+
+- Devuelve un array con los distintos valores que toma un determinado campo en los documentos de la coleccion.
+
+db.colection.distinct(value)
+
+- Filtrar sub documentos
+
+db.colection.find({doc.subdoc:value})
+
+- Filtrar utlizando expresiones regulares
+
+db.collection.fin({name: /^Max$/i})
+
+-- Omitir y limitar resultado en consultas
+
+- Ignorar los resultados anteriores al parametro definido
+.skip(num)
+
+- Limita los resultados al parametro definido
+.limit(num)
+
+-- Consulta agrupada
+
+- db.usuarios.find({}, {_id: 0, name:1, last_name: 1, age: 1}).sort({edad:1}).skip(2).limit(3)
+
+{
+    name: juan,
+    last_name: gonzalez,
+    age: 14
+}
+{
+    name: maria,
+    last_name: ramirez,
+    age: 16
+}
+{
+    name: pablo,
+    last_name: martinez,
+    age: 17
+}
+

@@ -35,3 +35,11 @@ socket.on("message", (data) => {
     ${data.message}`
     chatMessages.appendChild(messageElement)
 })
+
+socket.on('userConnected', (username) => {
+    alert(username)
+})
+
+socket.on('disconnect', (username) => {
+    alert("se ha desconectado el usuario " + username)
+})
