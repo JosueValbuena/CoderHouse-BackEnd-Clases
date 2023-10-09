@@ -159,3 +159,15 @@ db.collection.fin({name: /^Max$/i})
     age: 17
 }
 
+-- Conectar mongo mediante mongoose a app backend
+
+const { default: mongoose } = require('mongoose');
+
+mongoose
+.connect(process.env.DB_SECRET_KEY)
+.then(()=>{
+    console.log("Conectado a la base de datos")
+})
+.catch(error => {
+    console.log(error)
+})

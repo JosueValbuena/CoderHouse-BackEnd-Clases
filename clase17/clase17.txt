@@ -1,0 +1,63 @@
+-- stages / escenarios
+$count: contar el numero de documentos
+$skip: devuelve los resultados despues del numero indicado
+$limit: limita el numero de documentos hasta el numero indicado
+$match: devuelve solo documentos que cumplan con una condicion
+$lookup: equivale a 'left join'
+$set / $addFields: agrega una nueva propiedad a los documentos de un stage
+$sort: ordenar campos (1 ascendente, -1 descendente)
+$group: agrupar resultados en un solo campo
+$project: crear un nuevo documento a partir de un arreglo de resultados
+$merge: agregar resultados en una coleccion nueva
+
+-- consultas agrupadas .aggregate
+
+let users = await collectionModel.aggregate([
+    {
+        $match: {ciudad: "santiago"}
+    },
+    {
+        $group: {_id: '$first_name', totalQuantity:{$sum: '$orders'}}
+    },
+    {
+        $sort: {totalQuantity: 1}
+    },
+    {
+        $group: {_id: 1, orders: {$push: "$$ROOT"}}
+    },
+    {
+        $project: {
+            "_id": 0,
+            orders: "$orders"
+        }
+    },
+    $merge: {
+        into: "reports"
+    }
+
+    console.log(users);
+])
+
+-- Paginacion
+
+npm install mongoose-paginate-v2
+
+- models
+const mongoosePaginate = require(''mongoose=paginate-v2);
+
+const colectionCollection..
+
+const colectionSchema = new mongoose.Schema({
+    ...
+
+})
+
+colectionSchema.plugin(mongoosePaginate);
+
+- app.js 
+
+const enviroment = async () => {
+    ...
+
+    let users = await userModel.paginate({gender: 'Female'}, {limit: 20, page: 1});
+};
