@@ -38,10 +38,10 @@ const studentSchema = mongoose.Schema({
     email: String,
     gender: String,
     courses: {
-        trype: [
+        type: [
             {
                 course:{
-                    trype: mongoose.Schema.Types.ObjectId,
+                    type: mongoose.Schema.Types.ObjectId,
                     ref: "courses"
                 }
             }
