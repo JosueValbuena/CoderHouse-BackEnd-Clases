@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }))
 
 //guardado en mongo
 app.use(
-    session({ //middleware que establece sesion para el usuario y guarda informacion en sistema de archivos.
+    session({ //middleware que establece sesion para el usuario y guarda informacion.
         store: MongoStore.create({
             mongoUrl: process.env.MONGO_URL,
             ttl: 1
