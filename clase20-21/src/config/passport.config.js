@@ -9,7 +9,7 @@ import GitHubStrategy from 'passport-github2';
 const localStrategy = local.Strategy;
 
 const initializePassport = () => {
-    passport.use('/register', new localStrategy({
+    passport.use('register', new localStrategy({
         passReqToCallback: true,
         usernameField: 'email'
     },

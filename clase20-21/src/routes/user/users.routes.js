@@ -25,7 +25,9 @@ userRoutes.post('/login', passport.authenticate('login', { failureFlash: '/faill
             email: req.user.email
         };
 
-        res.send({ status: 'success', pauload: req.user });
+        req.session.autorized = true;
+
+        res.send({ status: 'success', payload: req.user });
     });
 
 userRoutes.get('/faillogin', (req, res) => {

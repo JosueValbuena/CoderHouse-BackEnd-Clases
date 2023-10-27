@@ -1,5 +1,5 @@
 import express from 'express';
-import { createHash, isValidPassword } from './utils/utils.js';
+import { createHash, isValidPassword, generateToken, authToken } from './utils/utils.js';
 import passport from 'passport';
 import initializePassport from './config/passport.config.js';
 import MongoStore from 'connect-mongo';
@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 import session from 'express-session';
 import routes from './routes/index.routes.js';
 import handlebars from 'express-handlebars';
-import {__dirname, path} from './utils/utils.js'
+import { __dirname, path } from './utils/utils.js'
 import mongoose from 'mongoose';
 
 dotenv.config();
@@ -70,6 +70,38 @@ app.set('view engine', 'handlebars');
 }) */
 
 app.use('/', routes);
+
+const users = [];
+
+app.post('/register', (req, res) => {
+    const { name, email, password } = req.body;
+    const isExist = users.find(user => user.email === email);
+
+    if (isExist) return res.status(400).send({ error: 'error', message: 'Usuario ya existe' });
+
+    const newUser = {
+        name,
+        email,
+        password
+    };
+
+    users.push(newUser);
+
+    res.send({ status: 'success', message: 'Usuario creado' });
+});
+
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+    const user = users.find(user => user.email === email && user.password === password);
+
+    if (!user) return res.status(400).send({ status: 'error', error: 'credencial ivalida' });
+
+    console.log(user);
+
+    const access_token = generateToken(user);
+
+    res.send({ status: 'success', access_token });
+})
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);

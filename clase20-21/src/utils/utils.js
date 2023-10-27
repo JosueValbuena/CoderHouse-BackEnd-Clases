@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import path, { dirname } from 'path';
 import { fileURLToPath } from "url";
+import jwt from 'jsonwebtoken';
 
 //funcion que recibe una contraseña y la encripta o "hashea"
 export const createHash = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(10));
@@ -17,7 +18,7 @@ const __dirname = dirname(__filename);
 const generateToken = (user) => {
     const token = jwt.sign({user}, process.env.JWT_PRIVATE_KEY, {expiresIn:"24h"});
     return token
-}
+};
 
 const authToken = (req, res, next) => {
     const authHeader = req.headers.authorization
@@ -33,6 +34,11 @@ const authToken = (req, res, next) => {
         req.user = credential.user;
         next();
     });
-}
+};
 
-export {__dirname, path}
+export {
+    __dirname, 
+    path, 
+    generateToken, 
+    authToken
+};
