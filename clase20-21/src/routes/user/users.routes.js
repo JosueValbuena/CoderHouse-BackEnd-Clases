@@ -14,7 +14,7 @@ userRoutes.get('/failregister', async (req, res) => {
     res.send({ error: "Fallo de registro" });
 });
 
-userRoutes.post('/login', passport.authenticate('login', { failureFlash: '/faillogin' }),
+userRoutes.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }),
     async (req, res) => {
         if (!req.user) return res.status(400).send({ status: 'error', error: 'Credenciales invalidas' })
 
