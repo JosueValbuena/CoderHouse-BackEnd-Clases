@@ -1,0 +1,46 @@
+NVM = Software que nos permite descargar, installar y cambiadar de versiones de node en un mismo pc. es decir, un manejador de versiones de node.
+
+nvm list avalible
+lista de versiones de node
+
+nvm install xx.x.x 
+version de node que se instala dependiendo de la elegida en la lista
+
+nvm list 
+lista de versiones instaladas 
+
+nvm use xx.x.x 
+usar la version de node seleccionada de la lista
+
+NPM = maneja de versiones de paquetes de node (express, handlebars, etc)
+
+npm outdate
+lista de versiones de dependencias instaladas
+
+npm init -y
+iniciar un proyecto con npm
+
+npm instar xxx
+comando para instalar dependencias
+
+npm uninstall xxx
+comando para eliminar dependencias
+
+npm ci 
+instala las dependencias a partir de package-lock.json
+
+YARN = instalador de oaquetes desarrollado por facebook
+
+npm install -g yarn 
+instalacion global de yarn
+
+yarn --version
+comprobar version
+
+yarn init -y
+iniciar un proyecto con yarn
+
+yarn add express
+yarn add es el equivalente a npm i. es el comando para instalar dependiencias
+
+yarn remove
