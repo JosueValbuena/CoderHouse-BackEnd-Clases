@@ -1,0 +1,16 @@
+FROM node
+comando para mencionar con que tecnologia estoy trabajando
+
+WORKDIR /app
+direccion donde esta el archivo principal de la aplicacion
+
+COPY package.json ./
+indicarle al contenedor cuales son las dependencias necesarias dandole como referencia el archivo package.json
+
+RUN npm install
+comando para instalar las dependencias
+
+COPY . .
+crear una copia de todo el proyecto
+
+terminal de comandos -> docker build -t escalabilidad .
